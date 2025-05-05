@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+#define MAX_INPUT 1024
+#define MAX_ARGS 64
+#define DELIM " \t\r\n\a"
+
+void parse_input(char *input, char **args){
+    char *tok = strtok(input, " ");
+    int i = 0;
+    while(tok != NULL){
+        args[i] = tok;
+        printf("%s\n", tok);
+        tok = strtok(NULL, DELIM);
+    }
+   args[i] = NULL;
+
+}
+
+void forkts(){
+    pid_t p = fork();
+    printf("Hello world! Process ID = %d,\n", getpid());
+}
+
+int main(){
+    char input[MAX_INPUT];
+    char *tok;
+    while(1){
+        printf("sillyshell :3 >> ");
+        fgets(input, MAX_INPUT, stdin);
+        printf("Echoing: %s", input);
+        char *args[MAX_ARGS];
+        /**char *tok = strtok(input, " ");
+        int i = 0;
+        while(tok != NULL){
+            *args[i] = *tok;
+            printf("%s\n", tok);
+            tok = strtok(NULL, " ");
+        } **/
+        parse_input(input, args);
+        forkts();
+        if(fork()){
+            printf("ts forked\n");
+        }
+        printf("ts is going well!");
+
+
+
+
+
+    }
+    return 0;
+}

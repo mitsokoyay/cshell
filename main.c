@@ -10,14 +10,19 @@
 #define DELIM " \t\r\n\a"
 
 void parse_input(char *input, char **args){
-    char *tok = strtok(input, " ");
+    char *tok = strtok(input, DELIM);
     int i = 0;
     while(tok != NULL){
         args[i] = tok;
         printf("%s\n", tok);
         tok = strtok(NULL, DELIM);
+        i++;
     }
    args[i] = NULL;
+   for(int j = 0; j < i; j++){
+       printf("%s\n", args[j]);
+   }
+   execvp(args[0], args);
 
 }
 
@@ -42,10 +47,7 @@ int main(){
             tok = strtok(NULL, " ");
         } **/
         parse_input(input, args);
-        forkts();
-        if(fork()){
-            printf("ts forked\n");
-        }
+
         printf("ts is going well!");
 
 

@@ -22,7 +22,14 @@ void parse_input(char *input, char **args){
    for(int j = 0; j < i; j++){
        printf("%s\n", args[j]);
    }
-   execvp(args[0], args);
+   pid_t pid = fork();
+   if(pid == 0){
+       execvp(args[0], args);
+   }
+   else if(pid > 0){
+       wait(NULL);
+   }
+
 
 }
 

@@ -68,6 +68,19 @@ int main(){
         char *args[MAX_ARGS];
         parse_input(input, args);
         run_process(args);
+        if(strcmp("exit", args[0]) == 0){
+            break;
+        }
+        if(strcmp("cd", args[0]) == 0){
+            if(args[1] == NULL){
+                chdir("mitsoko");
+            }
+            else{
+            chdir(args[1]);
+            }
+            continue;
+        }
+
     }
     return 0;
 }

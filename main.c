@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,6 +20,7 @@ void parse_input(char *input, char **args){
         i++;
     }
    args[i] = NULL;
+   /*
    for(int j = 0; j < i; j++){
        printf("%s\n", args[j]);
    }
@@ -29,9 +31,27 @@ void parse_input(char *input, char **args){
    else if(pid > 0){
        wait(NULL);
    }
+   */
 
 
 }
+
+void run_process(char **args){
+
+    pid_t run = fork();
+    printf("%d\n", run);
+
+    if(run == 0){
+        printf("running execvp\n");
+        execvp(args[0], args);
+    }
+    else if(run > 0){
+        printf("waiting\n");
+        wait(NULL);
+    }
+}
+
+
 
 void forkts(){
     pid_t p = fork();
@@ -54,13 +74,7 @@ int main(){
             tok = strtok(NULL, " ");
         } **/
         parse_input(input, args);
-
-        printf("ts is going well!");
-
-
-
-
-
+        run_process(args);
     }
     return 0;
 }

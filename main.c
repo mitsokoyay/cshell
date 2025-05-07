@@ -66,13 +66,6 @@ int main(){
         fgets(input, MAX_INPUT, stdin);
         printf("Echoing: %s", input);
         char *args[MAX_ARGS];
-        /**char *tok = strtok(input, " ");
-        int i = 0;
-        while(tok != NULL){
-            *args[i] = *tok;
-            printf("%s\n", tok);
-            tok = strtok(NULL, " ");
-        } **/
         parse_input(input, args);
         run_process(args);
     }

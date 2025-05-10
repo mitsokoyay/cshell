@@ -5,8 +5,9 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <limits.h>
 
-#define MAX_INPUT 1024
+//#define MAX_INPUT 1024
 #define MAX_ARGS 64
 #define DELIM " \t\r\n\a"
 
@@ -40,9 +41,12 @@ void run_process(char **args){
 
 int main(){
     char input[MAX_INPUT];
+    char cwd[PATH_MAX];
     char *tok;
+    char *wd = getcwd(input, sizeof(input));
     while(1){
-        printf("sillyshell :3 >> ");
+        printf("sillyshell :3 %s >> ", wd);
+
         fgets(input, MAX_INPUT, stdin);
         printf("Echoing: %s", input);
         char *args[MAX_ARGS];

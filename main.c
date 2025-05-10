@@ -38,12 +38,6 @@ void run_process(char **args){
 }
 
 
-
-void forkts(){
-    pid_t p = fork();
-    printf("Hello world! Process ID = %d,\n", getpid());
-}
-
 int main(){
     char input[MAX_INPUT];
     char *tok;

@@ -20,20 +20,6 @@ void parse_input(char *input, char **args){
         i++;
     }
    args[i] = NULL;
-   /*
-   for(int j = 0; j < i; j++){
-       printf("%s\n", args[j]);
-   }
-   pid_t pid = fork();
-   if(pid == 0){
-       execvp(args[0], args);
-   }
-   else if(pid > 0){
-       wait(NULL);
-   }
-   */
-
-
 }
 
 void run_process(char **args){
@@ -67,10 +53,6 @@ int main(){
         printf("Echoing: %s", input);
         char *args[MAX_ARGS];
         parse_input(input, args);
-        run_process(args);
-        if(strcmp("exit", args[0]) == 0){
-            break;
-        }
         if(strcmp("cd", args[0]) == 0){
             if(args[1] == NULL){
                 chdir("mitsoko");
@@ -80,6 +62,11 @@ int main(){
             }
             continue;
         }
+        run_process(args);
+        if(strcmp("exit", args[0]) == 0){
+            break;
+        }
+
 
     }
     return 0;

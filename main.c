@@ -64,6 +64,7 @@ int main(){
         if(strcmp("exit", args[0]) == 0){
             break;
         }
+        printf("im loves nori lots :)\n");
 
 
     }

@@ -7,14 +7,26 @@
 #include <sys/wait.h>
 #include <limits.h>
 
-//#define MAX_INPUT 1024
+#define MAX_INPUT 1024
 #define MAX_ARGS 64
 #define DELIM " \t\r\n\a"
+
+
+int pijpe(int *pipedes){
+
+    printf("TS has not been piped");
+    return 0;
+}
+
+
 
 void parse_input(char *input, char **args){
     char *tok = strtok(input, DELIM);
     int i = 0;
     while(tok != NULL){
+        if(strcmp(tok, "|")){
+            pijpe(&i);
+        }
         args[i] = tok;
         printf("%s\n", tok);
         tok = strtok(NULL, DELIM);
@@ -60,11 +72,12 @@ int main(){
             }
             continue;
         }
-        run_process(args);
+
         if(strcmp("exit", args[0]) == 0){
             break;
         }
-        printf("im loves nori lots :)\n");
+        run_process(args);
+
 
 
     }

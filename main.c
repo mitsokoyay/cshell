@@ -14,7 +14,8 @@
 
 int pijpe(int *pipedes){
 
-    printf("TS has not been piped");
+    int pjipe = pipe();
+//    printf("TS has not been piped");
     return 0;
 }
 
